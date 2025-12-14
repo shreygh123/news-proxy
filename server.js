@@ -11,6 +11,16 @@ app.use(cors());
 const BASE_URL = "https://newsapi.org/v2/top-headlines";
 
 app.get("/api/news", async (req, res) => {
+    // ✅ CORS HEADERS (MANDATORY)
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  
+    // ✅ Handle preflight
+    if (req.method === "OPTIONS") {
+      return res.status(200).end();
+    }
+
   try {
     const {
       country = "us",
